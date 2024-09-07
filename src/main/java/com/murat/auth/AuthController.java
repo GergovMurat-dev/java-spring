@@ -31,6 +31,6 @@ public class AuthController {
             return new ResponseEntity<>(result.getErrorMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>("Пользователь успешно зарегестриован", HttpStatus.OK);
+        return ResponseEntity.ok("");
     }
 }

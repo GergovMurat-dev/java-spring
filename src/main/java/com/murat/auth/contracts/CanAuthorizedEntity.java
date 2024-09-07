@@ -1,12 +1,6 @@
 package com.murat.auth.contracts;
 
-public interface CanAuthorizedEntity {
+import org.springframework.security.core.userdetails.UserDetails;
 
-    Long getId();
-
-    String getName();
-
-    String getEmail();
-
-    String getPassword();
+public interface CanAuthorizedEntity extends UserDetails {
 }
