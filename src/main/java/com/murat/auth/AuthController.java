@@ -1,9 +1,7 @@
 package com.murat.auth;
 
-import com.murat.auth.contracts.CanAuthorizedEntity;
-import com.murat.auth.dto.RegisterDTO;
-import com.murat.shared.utils.ServiceResult;
-import org.springframework.http.HttpStatus;
+import com.murat.auth.entities.CanAuthorized;
+import com.murat.auth.requests.RegisterRequest;
 import org.springframework.http.ResponseEntity;
 import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
@@ -17,20 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
-    private final AuthService authService;
+    private final AuthServiceImpl authService;
 
-    public AuthController(AuthService authService) {
+    public AuthController(AuthServiceImpl authService) {
         this.authService = authService;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@Valid @RequestBody RegisterDTO data) {
-        ServiceResult<CanAuthorizedEntity> result = this.authService.register(data);
+    public ResponseEntity<CanAuthorized> register(@Valid @RequestBody RegisterRequest data) {
+        CanAuthorized user = this.authService.register(data);
 
-        if (result.isError()) {
-            return new ResponseEntity<>(result.getErrorMessage(), HttpStatus.BAD_REQUEST);
-        }
-
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(user);
     }
 }

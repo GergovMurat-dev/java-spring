@@ -1,10 +1,10 @@
-package com.murat.auth.dto;
+package com.murat.auth.requests;
 
-import com.murat.auth.contracts.CreateCanAuthorizedEntityDTO;
+import com.murat.auth.dto.CreateCanAuthorizedDTO;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
-public record RegisterDTO(
+public record RegisterRequest(
         @NotNull(message = "Значение поля 'Имя' обязательно")
         String name,
 
@@ -12,7 +12,7 @@ public record RegisterDTO(
         String email,
 
         @NotNull(message = "Значение поля 'Пароль' обязательно")
-        String password) implements CreateCanAuthorizedEntityDTO {
+        String password) implements CreateCanAuthorizedDTO {
     @Override
     public String getName() {
         return this.name;

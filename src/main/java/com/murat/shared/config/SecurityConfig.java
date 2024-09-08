@@ -1,6 +1,6 @@
 package com.murat.shared.config;
 
-import com.murat.auth.contracts.UserServiceContract;
+import com.murat.auth.UserService;
 import com.murat.shared.filters.JwtAuthenticationFilter;
 import com.murat.user.enums.Role;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +24,10 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    private final UserServiceContract userService;
+    private final UserService userService;
 
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
-                          UserServiceContract userService) {
+                          UserService userService) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.userService = userService;
     }

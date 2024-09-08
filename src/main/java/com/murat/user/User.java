@@ -1,6 +1,6 @@
 package com.murat.user;
 
-import com.murat.auth.contracts.CanAuthorizedEntity;
+import com.murat.auth.entities.CanAuthorized;
 import com.murat.user.enums.Role;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User implements CanAuthorizedEntity {
+public class User implements CanAuthorized {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

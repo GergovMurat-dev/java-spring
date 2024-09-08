@@ -1,7 +1,7 @@
 package com.murat.shared.filters;
 
-import com.murat.auth.contracts.UserServiceContract;
-import com.murat.shared.contracts.JwtServiceContract;
+import com.murat.auth.UserService;
+import com.murat.jwt.JwtService;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,11 +20,11 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtServiceContract jwtService;
-    private final UserServiceContract userService;
+    private final JwtService jwtService;
+    private final UserService userService;
 
-    public JwtAuthenticationFilter(JwtServiceContract jwtService,
-                                   UserServiceContract userService) {
+    public JwtAuthenticationFilter(JwtService jwtService,
+                                   UserService userService) {
         this.jwtService = jwtService;
         this.userService = userService;
     }
