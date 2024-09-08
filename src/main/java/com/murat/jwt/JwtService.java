@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Key;
+import java.util.Map;
 import java.util.function.Function;
 
 public interface JwtService {
@@ -12,6 +13,8 @@ public interface JwtService {
     boolean isTokenValid(String token, UserDetails userDetails);
 
     String generateToken(UserDetails userDetails);
+
+    String generateRefreshToken(Map<String, Object> extraClaims, UserDetails userDetails);
 
     <T> T extractClaim(String token, Function<Claims, T> claimsResolver);
 

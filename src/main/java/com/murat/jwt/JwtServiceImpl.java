@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 import java.util.function.Function;
 
 @Service
@@ -36,6 +37,15 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
+    public String generateRefreshToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 604800000))
+                .signWith(this.getSiginKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    @Override
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
@@ -43,7 +53,7 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public Key getSiginKey() {
-        byte[] key = Decoders.BASE64.decode("some-one-secret-key");
+        byte[] key = Decoders.BASE64.decode("H5x9L0eO/XgXYiK9gF/lCeoJjt79A0WoO3WEt9HhdXo=");
         return Keys.hmacShaKeyFor(key);
     }
 
